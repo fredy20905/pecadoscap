@@ -1,597 +1,300 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MedeGift — Desayunos y Anchetas Premium · Medellín</title>
-<meta name="description" content="Regalos y anchetas premium en Medellín. Entregamos emociones bien empacadas. Envíos Valle de Aburrá el mismo día."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+
 <style>
-:root{
-  --oro:#C7A96B;--oro-2:#B8964F;--oro-claro:#E8D5AA;
-  --negro:#1E1F0F;--negro-2:#2C2D18;--negro-3:#383925;
-  --beige:#FAF7F0;--crema:#F0EAD8;--crema-2:#E6DCCA;
-  --tx-n1:#F0EAD8;--tx-n2:#DFC08A;--tx-n3:#B8B49A;
-  --tx-b1:#1E1F0F;--tx-b2:#4A4830;--tx-b3:#7A5F1A;
-  --fs-xs:.75rem;--fs-sm:.875rem;--fs-md:1rem;--fs-lg:1.125rem;
-  --ease:cubic-bezier(.16,1,.3,1);
-  --ease-back:cubic-bezier(.34,1.56,.64,1);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Jost',sans-serif;font-size:var(--fs-md);line-height:1.65;background:var(--beige);color:var(--tx-b1);overflow-x:hidden}
-img{display:block;max-width:100%}
-a{color:inherit}
-button{font-family:inherit}
-:focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:1px}
-
-.skip{position:absolute;top:-100%;left:1rem;background:var(--negro);color:var(--tx-n1);padding:.6rem 1.4rem;font-size:var(--fs-sm);font-weight:400;z-index:9999;text-decoration:none}
-.skip:focus{top:1rem}
-
-/* HEADER */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:800;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.25rem,4vw,3rem);transition:background .5s var(--ease),border-color .5s;border-bottom:1px solid transparent}
-.hdr.on-dark .logo-name{color:var(--tx-n1)}
-.hdr.on-dark .logo-sub{color:var(--tx-n2)}
-.hdr.on-dark .nav-a{color:var(--tx-n3)}
-.hdr.on-dark .nav-a:hover{color:var(--tx-n1)}
-.hdr.on-dark .btn-cart{border-color:rgba(199,169,107,.45);color:var(--tx-n1)}
-.hdr.scrolled{background:rgba(250,247,240,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:rgba(199,169,107,.18)}
-.hdr.scrolled .logo-name{color:var(--negro)}
-.hdr.scrolled .logo-sub{color:var(--tx-b3)}
-.hdr.scrolled .nav-a{color:var(--tx-b2)}
-.hdr.scrolled .nav-a:hover{color:var(--tx-b1)}
-.hdr.scrolled .btn-cart{border-color:rgba(199,169,107,.5);color:var(--tx-b1)}
-.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1.1}
-.logo-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:.04em;transition:color .4s}
-.logo-sub{font-size:var(--fs-xs);letter-spacing:.28em;text-transform:uppercase;font-weight:400;transition:color .4s}
-.nav{display:flex;align-items:center;gap:clamp(.8rem,2.5vw,2.5rem)}
-.nav-a{font-size:var(--fs-sm);letter-spacing:.17em;text-transform:uppercase;font-weight:300;text-decoration:none;padding:.25rem 0;position:relative;transition:color .3s}
-.nav-a[aria-current="page"]{font-weight:500}
-.nav-a::after{content:'';position:absolute;bottom:-2px;left:0;right:100%;height:1px;background:var(--oro);transition:right .4s var(--ease)}
-.nav-a:hover::after,.nav-a[aria-current="page"]::after{right:0}
-.btn-cart{display:flex;align-items:center;gap:.45rem;background:none;border:1.5px solid;padding:.5rem 1.1rem;font-size:var(--fs-sm);letter-spacing:.15em;text-transform:uppercase;font-weight:300;cursor:pointer;min-height:44px;transition:all .35s var(--ease);white-space:nowrap}
-.btn-cart:hover{background:var(--negro);color:var(--tx-n1)!important;border-color:var(--negro)!important}
-.cart-n{display:inline-flex;align-items:center;justify-content:center;background:var(--oro);color:var(--negro);font-size:var(--fs-xs);font-weight:700;width:19px;height:19px;border-radius:50%;transform:scale(0);transition:transform .3s var(--ease-back);line-height:1}
-.cart-n.show{transform:scale(1)}
-@media(max-width:680px){.nav-a{display:none}.btn-cart{padding:.5rem .85rem;font-size:var(--fs-xs)}}
-
-/* HERO */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;background:var(--negro);overflow:hidden;padding-top:72px}
-.hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23f)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;opacity:.65;z-index:1}
-.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(199,169,107,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(199,169,107,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
-.hero-orb{position:absolute;width:min(720px,95vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(ellipse,rgba(199,169,107,.13) 0%,transparent 68%);top:50%;left:50%;transform:translate(-50%,-50%);animation:orbPulse 9s ease-in-out infinite;pointer-events:none;z-index:1}
-@keyframes orbPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-52%) scale(1.14);opacity:1}}
-.hero-deco{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.hero-deco::before{content:'';position:absolute;width:1px;height:60%;background:linear-gradient(to bottom,transparent,rgba(199,169,107,.22),transparent);top:20%;left:18%;transform:rotate(12deg)}
-.hero-deco::after{content:'';position:absolute;width:1px;height:45%;background:linear-gradient(to bottom,transparent,rgba(199,169,107,.14),transparent);top:25%;right:22%;transform:rotate(-8deg)}
-
-.hero-body{position:relative;z-index:2;text-align:center;padding:2rem clamp(1rem,5vw,4rem);max-width:980px;width:100%}
-
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-size:var(--fs-xs);letter-spacing:.34em;text-transform:uppercase;color:var(--tx-n2);font-weight:400;margin-bottom:2.2rem;opacity:0;animation:slideUp .7s .3s var(--ease) forwards}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:22px;height:1px;background:var(--oro);opacity:.65;flex-shrink:0}
-
-.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,9.5vw,8.8rem);font-weight:300;line-height:1.01;color:var(--tx-n1);margin-bottom:2.2rem;letter-spacing:-.01em}
-.h1-line{display:block;overflow:hidden;clip-path:inset(0 0 100% 0);animation:clipReveal .9s var(--ease) forwards}
-.h1-line:nth-child(1){animation-delay:.45s}
-.h1-line:nth-child(2){animation-delay:.63s;font-style:italic;color:var(--tx-n2)}
-.h1-line:nth-child(3){animation-delay:.8s}
-@keyframes clipReveal{to{clip-path:inset(0 0 0% 0)}}
-
-.hero-sub{font-size:var(--fs-lg);font-weight:300;color:var(--tx-n3);max-width:520px;margin:0 auto 3rem;line-height:1.78;opacity:0;animation:slideUp .7s .98s var(--ease) forwards}
-.hero-ctas{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideUp .7s 1.15s var(--ease) forwards}
-
-.btn-primary{display:inline-flex;align-items:center;gap:.7rem;background:var(--oro);color:var(--negro);padding:.95rem 2.3rem;font-family:'Jost',sans-serif;font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;font-weight:500;text-decoration:none;border:none;cursor:pointer;min-height:50px;transition:all .4s var(--ease);position:relative;overflow:hidden}
-.btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-100%);transition:transform .5s var(--ease)}
-.btn-primary:hover::before{transform:translateX(0)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(199,169,107,.35)}
-.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;background:transparent;border:1.5px solid rgba(199,169,107,.4);color:var(--tx-n1);padding:.95rem 2rem;font-family:'Jost',sans-serif;font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;font-weight:300;text-decoration:none;cursor:pointer;min-height:50px;transition:all .4s var(--ease)}
-.btn-ghost:hover{background:rgba(199,169,107,.1);border-color:var(--oro)}
-
-.hero-scroll{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:2;pointer-events:none;opacity:0;animation:fadeIn 1s 1.7s forwards}
-.hero-scroll span{font-size:var(--fs-xs);letter-spacing:.28em;text-transform:uppercase;color:var(--tx-n3);font-weight:300}
-.scroll-line{width:1px;height:46px;background:linear-gradient(to bottom,rgba(199,169,107,.7),transparent);animation:scrollDrop 2.3s 2s ease-in-out infinite}
-@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
-@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{to{opacity:1}}
-
-/* MARQUEE */
-.marquee-wrap{background:var(--oro);padding:.8rem 0;overflow:hidden;white-space:nowrap}
-.marquee-track{display:inline-flex;animation:marquee 26s linear infinite}
-.marquee-wrap:hover .marquee-track{animation-play-state:paused}
-.marquee-item{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:var(--negro);letter-spacing:.05em;padding:0 2.4rem}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* FILOSOFÍA */
-.phi{padding:clamp(5rem,9vw,8rem) clamp(1.25rem,4vw,3rem);max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
-@media(max-width:860px){.phi{grid-template-columns:1fr;gap:3rem}}
-.phi-label{display:flex;align-items:center;gap:.7rem;font-size:var(--fs-xs);letter-spacing:.3em;text-transform:uppercase;color:var(--tx-b3);font-weight:400;margin-bottom:1.2rem}
-.phi-label::before{content:'';width:18px;height:1px;background:var(--oro)}
-.phi-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:400;line-height:1.16;margin-bottom:1.5rem;color:var(--tx-b1)}
-.phi-title em{font-style:italic;color:var(--tx-b3)}
-.phi-p{font-size:var(--fs-md);font-weight:300;color:var(--tx-b2);line-height:1.88;margin-bottom:1.1rem}
-.phi-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.2rem}
-.stat{padding:.8rem 1.1rem;border-left:2px solid var(--crema-2);transition:border-color .3s}
-.stat:hover{border-left-color:var(--oro)}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--tx-b1);line-height:1;margin-bottom:.25rem}
-.stat-lbl{font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-b2);font-weight:400}
-.phi-visual{position:relative}
-.phi-svg-wrap{width:100%;max-width:480px;margin:0 auto;position:relative}
-.phi-badge{position:absolute;top:1.5rem;right:-1rem;width:88px;height:88px;background:var(--oro);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;animation:rotateBadge 15s linear infinite}
-.phi-badge p{font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:var(--negro);font-weight:500;text-align:center;line-height:1.75}
-@keyframes rotateBadge{to{transform:rotate(360deg)}}
-
-/* CATÁLOGO */
-.cat-section{background:var(--negro);padding:clamp(4.5rem,8vw,7.5rem) clamp(1.25rem,4vw,3rem);position:relative;overflow:hidden}
-.cat-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 88px,rgba(199,169,107,.016) 88px,rgba(199,169,107,.016) 89px);pointer-events:none}
-.cat-head{text-align:center;max-width:720px;margin:0 auto clamp(3rem,5vw,5rem);position:relative;z-index:1}
-.cat-eyebrow{font-size:var(--fs-xs);letter-spacing:.32em;text-transform:uppercase;color:var(--tx-n2);font-weight:400;margin-bottom:1rem}
-.cat-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:300;color:var(--tx-n1);line-height:1.08}
-.cat-h2 em{font-style:italic;color:var(--tx-n2)}
-.cat-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(.8rem,1.4vw,1.4rem);max-width:1400px;margin:0 auto;position:relative;z-index:1}
-@media(max-width:980px){.cat-grid{grid-template-columns:repeat(2,1fr)}.p-wide,.p-normal,.p-third,.p-half{grid-column:span 1!important}}
-@media(max-width:560px){.cat-grid{grid-template-columns:1fr}}
-.p-wide{grid-column:span 7}.p-normal{grid-column:span 5}.p-third{grid-column:span 4}.p-half{grid-column:span 6}
-
-.pcard{position:relative;overflow:hidden;background:var(--negro-2);cursor:pointer;opacity:0;transform:translateY(44px);transition:opacity .6s var(--ease),transform .6s var(--ease),box-shadow .5s}
-.pcard.in{opacity:1;transform:translateY(0)}
-.pcard:hover{box-shadow:0 28px 72px rgba(0,0,0,.55);z-index:2}
-.pcard:focus-within{outline:3px solid var(--oro);outline-offset:0}
-.pcard-art{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;transition:transform .75s var(--ease)}
-.p-wide .pcard-art{aspect-ratio:16/9}
-.pcard:hover .pcard-art{transform:scale(1.05)}
-.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,31,15,.92) 0%,rgba(30,31,15,.28) 48%,transparent 100%);transition:opacity .45s}
-.pcard:hover .pcard-overlay{opacity:.75}
-.pcard-badge{position:absolute;top:1rem;left:1rem;z-index:2;background:var(--oro);color:var(--negro);font-size:var(--fs-xs);letter-spacing:.15em;text-transform:uppercase;padding:.28rem .75rem;font-weight:500;line-height:1.4}
-.pcard-info{position:absolute;bottom:0;left:0;right:0;padding:clamp(1.2rem,2.5vw,1.8rem) clamp(1.2rem,2.5vw,2rem);z-index:3}
-.pcard-cat{font-size:var(--fs-xs);letter-spacing:.22em;text-transform:uppercase;color:var(--tx-n2);font-weight:400;margin-bottom:.42rem}
-.pcard-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.4vw,1.55rem);font-weight:400;color:var(--tx-n1);line-height:1.18;margin-bottom:.45rem}
-.p-wide .pcard-name{font-size:clamp(1.3rem,2.7vw,1.9rem)}
-.pcard-desc{font-size:var(--fs-sm);font-weight:300;color:var(--tx-n3);line-height:1.62;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .4s}
-.pcard:hover .pcard-desc{max-height:90px;opacity:1}
-.pcard-foot{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:.9rem;opacity:0;transform:translateY(8px);transition:opacity .4s .1s,transform .4s .1s var(--ease)}
-.pcard:hover .pcard-foot{opacity:1;transform:translateY(0)}
-.pcard-price{font-family:'Cormorant Garamond',serif;font-size:clamp(1.15rem,1.9vw,1.5rem);font-weight:500;color:var(--oro-claro);line-height:1}
-.pcard-price small{font-size:var(--fs-xs);font-weight:300;color:var(--tx-n3);margin-left:3px}
-.btn-add{background:transparent;border:1.5px solid rgba(199,169,107,.5);color:var(--oro-claro);padding:.5rem 1.15rem;font-family:'Jost',sans-serif;font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;font-weight:400;cursor:pointer;white-space:nowrap;min-height:40px;transition:all .3s var(--ease)}
-.btn-add:hover,.btn-add.added{background:var(--oro);color:var(--negro);border-color:var(--oro)}
-.cat-more{text-align:center;margin-top:clamp(2rem,4vw,3.5rem);position:relative;z-index:1}
-.btn-outline{display:inline-flex;align-items:center;gap:.6rem;border:1.5px solid rgba(199,169,107,.4);color:var(--tx-n2);padding:.9rem 2.4rem;font-family:'Jost',sans-serif;font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;font-weight:300;text-decoration:none;background:none;min-height:50px;transition:all .4s var(--ease)}
-.btn-outline:hover{background:var(--oro);color:var(--negro);border-color:var(--oro)}
-
-/* INCLUYE */
-.inc-section{padding:clamp(4.5rem,8vw,7.5rem) clamp(1.25rem,4vw,3rem);max-width:1320px;margin:0 auto}
-.inc-head{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:clamp(2rem,4vw,3.5rem)}
-@media(max-width:700px){.inc-head{grid-template-columns:1fr;gap:1rem}}
-.inc-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.6vw,3rem);font-weight:400;line-height:1.18;color:var(--tx-b1)}
-.inc-h2 em{font-style:italic;color:var(--tx-b3)}
-.inc-note{font-size:var(--fs-md);font-weight:300;color:var(--tx-b2);line-height:1.85;padding-top:.3rem}
-.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
-.inc-card{display:flex;align-items:flex-start;gap:1rem;padding:1.3rem 1.5rem;border:1px solid var(--crema-2);transition:border-color .35s,transform .45s var(--ease);opacity:0;transform:translateY(22px)}
-.inc-card.in{opacity:1;transform:translateY(0)}
-.inc-card:hover{border-color:var(--oro);transform:translateY(-3px)}
-.inc-icon{width:38px;height:38px;flex-shrink:0;background:var(--crema);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
-.inc-name{font-size:var(--fs-sm);font-weight:500;color:var(--tx-b1);margin-bottom:.22rem}
-.inc-desc{font-size:var(--fs-sm);font-weight:300;color:var(--tx-b2);line-height:1.62}
-
-/* CTA */
-.cta-section{background:var(--negro);padding:clamp(5rem,10vw,9rem) clamp(1.25rem,4vw,3rem);text-align:center;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;width:min(640px,90vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(199,169,107,.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-.cta-eyebrow{font-size:var(--fs-xs);letter-spacing:.33em;text-transform:uppercase;color:var(--tx-n2);font-weight:400;margin-bottom:1.2rem}
-.cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6.5vw,5.5rem);font-weight:300;color:var(--tx-n1);line-height:1.04;margin-bottom:1.6rem}
-.cta-h2 em{font-style:italic;color:var(--tx-n2)}
-.cta-p{font-size:var(--fs-lg);font-weight:300;color:var(--tx-n3);max-width:460px;margin:0 auto 2.8rem;line-height:1.8}
-.btn-wa{display:inline-flex;align-items:center;gap:.85rem;background:var(--oro);color:var(--negro);padding:1rem 2.9rem;font-family:'Jost',sans-serif;font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;text-decoration:none;min-height:52px;transition:all .45s var(--ease);position:relative;overflow:hidden}
-.btn-wa::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.14);transform:translateX(-100%);transition:transform .55s var(--ease)}
-.btn-wa:hover::before{transform:translateX(0)}
-.btn-wa:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(199,169,107,.32)}
-.btn-wa svg{flex-shrink:0}
-
-/* FOOTER */
-.footer{background:var(--negro);border-top:1px solid rgba(199,169,107,.1);padding:clamp(3.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem) clamp(1.5rem,3vw,2.5rem)}
-.footer-grid{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:2fr repeat(3,1fr);gap:clamp(1.5rem,4vw,4.5rem);margin-bottom:clamp(2rem,4vw,3.5rem)}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
-@media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
-.f-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:600;color:var(--tx-n1);margin-bottom:.3rem}
-.f-brand-tag{font-size:var(--fs-xs);letter-spacing:.28em;text-transform:uppercase;color:var(--tx-n2);font-weight:300;margin-bottom:1.1rem}
-.f-desc{font-size:var(--fs-sm);font-weight:300;color:var(--tx-n3);line-height:1.82;max-width:280px}
-.f-col-title{font-size:var(--fs-xs);letter-spacing:.26em;text-transform:uppercase;color:var(--tx-n2);font-weight:400;margin-bottom:1.2rem}
-.f-link{display:block;font-size:var(--fs-sm);font-weight:300;color:var(--tx-n3);text-decoration:none;margin-bottom:.6rem;transition:color .25s}
-.f-link:hover{color:var(--tx-n1)}
-.f-bottom{max-width:1320px;margin:0 auto;padding-top:1.8rem;border-top:1px solid rgba(240,234,216,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
-.f-bottom p{font-size:var(--fs-xs);font-weight:300;color:rgba(240,234,216,.28);letter-spacing:.06em}
-
-/* CARRITO */
-.c-backdrop{position:fixed;inset:0;background:rgba(30,31,15,0);z-index:600;pointer-events:none;transition:background .45s var(--ease)}
-.c-backdrop.open{background:rgba(30,31,15,.62);pointer-events:all}
-.c-panel{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--beige);z-index:601;transform:translateX(100%);transition:transform .5s var(--ease);display:flex;flex-direction:column;box-shadow:-10px 0 44px rgba(30,31,15,.22)}
-.c-panel.open{transform:translateX(0)}
-.c-head{padding:1.6rem 2rem 1.3rem;border-bottom:1px solid var(--crema-2);display:flex;align-items:center;justify-content:space-between}
-.c-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--tx-b1)}
-.c-close{background:none;border:none;cursor:pointer;color:var(--tx-b2);min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;transition:all .3s}
-.c-close:hover{color:var(--tx-b1);transform:rotate(90deg)}
-.c-items{flex:1;overflow-y:auto;padding:1.3rem 2rem}
-.c-items::-webkit-scrollbar{width:3px}
-.c-items::-webkit-scrollbar-thumb{background:var(--crema-2)}
-.c-empty{text-align:center;padding:5rem 1rem;color:var(--tx-b2)}
-.c-empty p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;margin-bottom:.4rem}
-.c-empty small{font-size:var(--fs-sm);font-weight:300}
-.c-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--crema-2);animation:slideRight .35s var(--ease)}
-@keyframes slideRight{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
-.c-thumb{width:64px;height:64px;flex-shrink:0;background:var(--crema);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.75rem}
-.c-info{flex:1;min-width:0}
-.c-iname{font-family:'Cormorant Garamond',serif;font-size:.98rem;font-weight:400;color:var(--tx-b1);line-height:1.25;margin-bottom:.2rem}
-.c-iprice{font-size:var(--fs-sm);color:var(--tx-b3);font-weight:400;margin-bottom:.5rem}
-.c-qty{display:flex;align-items:center;gap:.45rem}
-.qty-b{width:27px;height:27px;border-radius:50%;background:var(--crema);border:1px solid var(--crema-2);font-size:.95rem;color:var(--tx-b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;transition:background .2s}
-.qty-b:hover{background:var(--oro-claro)}
-.qty-n{font-size:var(--fs-sm);font-weight:500;min-width:20px;text-align:center}
-.c-del{background:none;border:none;cursor:pointer;color:var(--tx-b2);opacity:.45;align-self:flex-start;min-height:32px;min-width:32px;display:flex;align-items:center;justify-content:center;transition:opacity .25s,color .25s}
-.c-del:hover{opacity:1;color:#b52a2a}
-.c-foot{padding:1.4rem 2rem;border-top:1px solid var(--crema-2);background:var(--crema)}
-.c-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem}
-.c-total-lbl{font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--tx-b2);font-weight:400}
-.c-total-val{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--tx-b1)}
-.c-note{font-size:var(--fs-xs);font-weight:300;color:var(--tx-b2);margin-bottom:1.3rem;padding-top:.5rem;border-top:1px solid var(--crema-2)}
-.btn-confirm{width:100%;padding:1rem;background:var(--negro);color:var(--tx-n1);border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;font-weight:300;display:flex;align-items:center;justify-content:center;gap:.75rem;min-height:52px;transition:background .35s var(--ease)}
-.btn-confirm:hover{background:var(--tx-b3)}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--negro);color:var(--tx-n1);padding:.85rem 1.55rem;font-size:var(--fs-sm);letter-spacing:.07em;display:flex;align-items:center;gap:.6rem;z-index:700;border-left:3px solid var(--oro);transform:translateY(64px);opacity:0;transition:all .42s var(--ease);max-width:300px}
-.toast.show{transform:translateY(0);opacity:1}
-
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:translateY(0)}
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IM Fell English',serif;background:#0e0b0b;color:#d4c4a0;min-height:100vh;padding:2rem 1rem 4rem}
+  #app{max-width:620px;margin:0 auto}
+  .cover{text-align:center;padding:3rem 1rem}
+  .cover-symbol{font-size:5rem;margin-bottom:1.5rem;display:block;line-height:1;filter:sepia(1) brightness(0.7)}
+  .cover h1{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:0.12em;color:#c9a84c;text-transform:uppercase;margin-bottom:0.5rem;line-height:1.3}
+  .cover-sub{font-style:italic;color:#8a7a60;font-size:1rem;margin-bottom:2.5rem}
+  .cover-desc{font-size:0.95rem;line-height:1.8;color:#b0a080;margin-bottom:2.5rem;max-width:440px;margin-left:auto;margin-right:auto}
+  .btn-primary{background:#c9a84c;color:#1a1208;border:none;padding:0.85rem 2.5rem;font-family:'Cinzel',serif;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.1s;border-radius:2px}
+  .btn-primary:hover{background:#e0bc60}
+  .btn-primary:active{transform:scale(0.98)}
+  .question-wrap{padding:1rem 0;animation:fadeIn 0.4s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .block-label{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#6a5a3a;margin-bottom:0.4rem}
+  .progress-bar{height:2px;background:#2a2010;margin-bottom:2rem;border-radius:1px;overflow:hidden}
+  .progress-fill{height:100%;background:#c9a84c;transition:width 0.5s ease;border-radius:1px}
+  .q-number{font-family:'Cinzel',serif;font-size:0.75rem;color:#5a4a2a;letter-spacing:0.15em;margin-bottom:1.2rem}
+  .q-text{font-size:1.1rem;line-height:1.75;color:#d4c4a0;margin-bottom:2rem;font-style:italic}
+  .q-scenario-intro{font-size:0.7rem;color:#8a7a60;margin-bottom:0.8rem;font-style:normal;font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase}
+  .options{display:flex;flex-direction:column;gap:0.75rem}
+  .opt-btn{background:transparent;border:1px solid #3a2e1a;color:#b0a080;padding:0.9rem 1.2rem;text-align:left;font-family:'IM Fell English',serif;font-size:0.95rem;cursor:pointer;transition:all 0.2s;border-radius:2px;line-height:1.5}
+  .opt-btn:hover{border-color:#c9a84c;color:#d4c4a0;background:#1e1810}
+  .opt-btn.selected{border-color:#c9a84c;background:#1e1810;color:#c9a84c}
+  .textarea-wrap textarea{width:100%;background:#140f0f;border:1px solid #3a2e1a;color:#d4c4a0;font-family:'IM Fell English',serif;font-size:0.95rem;padding:1rem;resize:vertical;min-height:100px;border-radius:2px;outline:none;line-height:1.6}
+  .textarea-wrap textarea:focus{border-color:#c9a84c}
+  .textarea-wrap textarea::placeholder{color:#4a3e2a;font-style:italic}
+  .nav-row{display:flex;justify-content:flex-end;margin-top:1.5rem}
+  .btn-next{background:transparent;border:1px solid #c9a84c;color:#c9a84c;padding:0.65rem 1.8rem;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;border-radius:2px}
+  .btn-next:hover{background:#c9a84c;color:#1a1208}
+  .btn-next:disabled{opacity:0.3;cursor:not-allowed}
+  .divider{height:1px;background:linear-gradient(to right,transparent,#3a2e1a 30%,#3a2e1a 70%,transparent);margin:2rem 0}
+  .result-wrap{padding:1rem 0;animation:fadeIn 0.6s ease}
+  .result-header{text-align:center;margin-bottom:2.5rem}
+  .result-sin-icon{font-size:4.5rem;display:block;margin-bottom:1rem;filter:sepia(1) brightness(0.8)}
+  .result-sin-name{font-family:'Cinzel',serif;font-size:2rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.3rem}
+  .result-sin-latin{font-style:italic;color:#6a5a3a;font-size:0.95rem;margin-bottom:1.2rem}
+  .result-desc{font-size:0.95rem;line-height:1.8;color:#b0a080;max-width:480px;margin:0 auto 1.5rem}
+  .bars-section{margin-bottom:2.5rem}
+  .bars-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#5a4a2a;margin-bottom:1.2rem;text-align:center}
+  .sin-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:0.85rem}
+  .sin-bar-label{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a60;width:90px;flex-shrink:0;text-align:right}
+  .sin-bar-track{flex:1;height:6px;background:#2a2010;border-radius:3px;overflow:hidden}
+  .sin-bar-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(0.25,1,0.5,1);width:0}
+  .sin-bar-pct{font-family:'Cinzel',serif;font-size:0.72rem;color:#8a7a60;width:38px;text-align:right;flex-shrink:0}
+  .sin-bar-row.dominant .sin-bar-label{color:#c9a84c}
+  .sin-bar-row.dominant .sin-bar-pct{color:#c9a84c}
+  .virtue-section{border:1px solid #3a2e1a;padding:1.4rem 1.6rem;margin-bottom:2rem;border-radius:2px}
+  .virtue-label{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#5a4a2a;margin-bottom:0.6rem}
+  .virtue-text{font-size:0.95rem;line-height:1.7;color:#b0a080;font-style:italic}
+  .btn-row{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+  .btn-export{background:#c9a84c;color:#1a1208;border:none;padding:0.75rem 1.8rem;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border-radius:2px;display:flex;align-items:center;gap:8px}
+  .btn-export:hover{background:#e0bc60}
+  .btn-export i{font-size:16px}
+  .btn-restart{background:transparent;border:1px solid #4a3e2a;color:#6a5a3a;padding:0.75rem 1.8rem;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border-radius:2px}
+  .btn-restart:hover{border-color:#8a7a60;color:#a09070}
+  .ornament{text-align:center;color:#3a2e1a;font-size:1.4rem;margin:1.5rem 0;letter-spacing:0.5em}
+  .name-wrap{margin-bottom:2rem}
+  .name-label{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#6a5a3a;margin-bottom:0.6rem;display:block}
+  .name-input{width:100%;background:#140f0f;border:1px solid #3a2e1a;color:#d4c4a0;font-family:'IM Fell English',serif;font-size:1rem;padding:0.7rem 1rem;border-radius:2px;outline:none}
+  .name-input:focus{border-color:#c9a84c}
+  .name-input::placeholder{color:#4a3e2a;font-style:italic}
+  .export-note{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:#4a3e2a;text-align:center;margin-top:0.6rem}
 </style>
-</head>
-<body>
-<a class="skip" href="#main">Saltar al contenido</a>
 
-<header class="hdr on-dark" id="hdr" role="banner">
-  <a href="index.html" class="logo" aria-label="MedeGift — Inicio">
-    <span class="logo-name">MedeGift</span>
-    <span class="logo-sub">Desayunos y Anchetas</span>
-  </a>
-  <nav class="nav" aria-label="Navegación principal">
-    <a href="index.html"    class="nav-a" aria-current="page">Inicio</a>
-    <a href="catalogo.html" class="nav-a">Catálogo</a>
-    <a href="nosotros.html" class="nav-a">Nosotros</a>
-    <a href="contacto.html" class="nav-a">Contacto</a>
-    <button class="btn-cart" id="btnCart" aria-label="Abrir carrito de compras">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span>Mi selección</span>
-      <span class="cart-n" id="cartN">0</span>
-    </button>
-  </nav>
-</header>
-
-<section class="hero" aria-labelledby="heroH1">
-  <div class="hero-grain" aria-hidden="true"></div>
-  <div class="hero-grid"  aria-hidden="true"></div>
-  <div class="hero-orb"   aria-hidden="true"></div>
-  <div class="hero-deco"  aria-hidden="true"></div>
-  <div class="hero-body">
-    <p class="hero-eyebrow"><span>Desde 2023</span></p>
-    <h1 class="hero-h1" id="heroH1">
-      <span class="h1-line">No vendemos</span>
-      <span class="h1-line">productos,</span>
-      <span class="h1-line" style="font-size:clamp(2rem,6vw,5.5rem)">entregamos emociones.</span>
-    </h1>
-    <p class="hero-sub">Anchetas, desayunos y regalos premium diseñados para hacer memorable cada momento especial.</p>
-    <div class="hero-ctas">
-      <a href="catalogo.html" class="btn-primary">Ver colección <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      <a href="https://wa.me/573017472635?text=Hola%2C+quiero+información+sobre+anchetas" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Pedir por WhatsApp
-      </a>
-    </div>
-  </div>
-  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><div class="scroll-line"></div></div>
-</section>
-
-<div class="marquee-wrap" aria-hidden="true"><div class="marquee-track" id="mTrack"></div></div>
-
-<main id="main">
-
-  <section class="phi" aria-labelledby="phiH2">
-    <div>
-      <p class="phi-label reveal">Nuestra esencia</p>
-      <h2 class="phi-title reveal" id="phiH2">Elegancia, calidez<br/>y <em>conexión emocional</em></h2>
-      <p class="phi-p reveal">En MedeGift creemos que un regalo bien pensado puede cambiar el día de alguien. Cada ancheta y desayuno sorpresa que sale de nuestras manos lleva una intención: que quien lo recibe sienta que es especial.</p>
-      <p class="phi-p reveal">Cubrimos todo el <strong>Valle de Aburrá</strong> — Medellín, Envigado, Bello, Itagüí, Sabaneta, La Estrella, Caldas, Copacabana, Girardota y Barbosa — con entregas el mismo día.</p>
-      <div class="phi-stats">
-        <div class="stat reveal"><div class="stat-num" id="cnt1">0+</div><div class="stat-lbl">Regalos entregados</div></div>
-        <div class="stat reveal"><div class="stat-num">10</div><div class="stat-lbl">Municipios cubiertos</div></div>
-        <div class="stat reveal"><div class="stat-num">★ 5.0</div><div class="stat-lbl">Calificación</div></div>
-      </div>
-    </div>
-    <div class="phi-visual reveal">
-      <div class="phi-svg-wrap">
-        <svg viewBox="0 0 440 580" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="Ilustración decorativa caja de regalo MedeGift">
-          <rect width="440" height="580" fill="#2C2D18"/>
-          <line x1="0" y1="72" x2="440" y2="72" stroke="#C7A96B" stroke-opacity=".1" stroke-width="1"/>
-          <line x1="0" y1="508" x2="440" y2="508" stroke="#C7A96B" stroke-opacity=".1" stroke-width="1"/>
-          <line x1="72" y1="0" x2="72" y2="580" stroke="#C7A96B" stroke-opacity=".06" stroke-width="1"/>
-          <line x1="368" y1="0" x2="368" y2="580" stroke="#C7A96B" stroke-opacity=".06" stroke-width="1"/>
-          <rect x="120" y="270" width="200" height="185" rx="3" fill="#C7A96B" fill-opacity=".1" stroke="#C7A96B" stroke-opacity=".35" stroke-width="1.5"/>
-          <rect x="108" y="248" width="224" height="38" rx="3" fill="#C7A96B" fill-opacity=".2" stroke="#C7A96B" stroke-opacity=".45" stroke-width="1.5"/>
-          <rect x="216" y="248" width="8" height="185" fill="#C7A96B" fill-opacity=".35"/>
-          <rect x="108" y="263" width="224" height="8" fill="#C7A96B" fill-opacity=".35"/>
-          <path d="M220 250 Q192 218 176 228 Q164 238 188 246 Q206 252 220 250Z" fill="#C7A96B" fill-opacity=".4" stroke="#C7A96B" stroke-opacity=".6" stroke-width=".8"/>
-          <path d="M220 250 Q248 218 264 228 Q276 238 252 246 Q234 252 220 250Z" fill="#C7A96B" fill-opacity=".4" stroke="#C7A96B" stroke-opacity=".6" stroke-width=".8"/>
-          <ellipse cx="220" cy="250" rx="7" ry="6" fill="#C7A96B" fill-opacity=".7"/>
-          <g transform="translate(155,355)">
-            <circle r="26" fill="#C7A96B" fill-opacity=".08" stroke="#C7A96B" stroke-opacity=".2" stroke-width="1"/>
-            <circle r="11" fill="#C7A96B" fill-opacity=".18"/>
-            <circle r="4" fill="#C7A96B" fill-opacity=".6"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".15"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".12" transform="rotate(60)"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".12" transform="rotate(120)"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".12" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".12" transform="rotate(240)"/>
-            <ellipse cx="0" cy="-17" rx="5" ry="9" fill="#C7A96B" fill-opacity=".12" transform="rotate(300)"/>
-          </g>
-          <g transform="translate(290,390)">
-            <circle r="18" fill="#C7A96B" fill-opacity=".07" stroke="#C7A96B" stroke-opacity=".15" stroke-width="1"/>
-            <circle r="7" fill="#C7A96B" fill-opacity=".15"/>
-            <circle r="3" fill="#C7A96B" fill-opacity=".5"/>
-            <ellipse cx="0" cy="-13" rx="4" ry="7" fill="#C7A96B" fill-opacity=".1"/>
-            <ellipse cx="0" cy="-13" rx="4" ry="7" fill="#C7A96B" fill-opacity=".1" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-13" rx="4" ry="7" fill="#C7A96B" fill-opacity=".1" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-13" rx="4" ry="7" fill="#C7A96B" fill-opacity=".1" transform="rotate(270)"/>
-          </g>
-          <text x="88" y="130" font-size="11" fill="#C7A96B" fill-opacity=".28">✦</text>
-          <text x="358" y="165" font-size="8" fill="#C7A96B" fill-opacity=".22">✦</text>
-          <text x="64" y="490" font-size="7" fill="#C7A96B" fill-opacity=".2">✦</text>
-          <text x="372" y="510" font-size="10" fill="#C7A96B" fill-opacity=".25">✦</text>
-          <text x="200" y="134" font-size="6" fill="#C7A96B" fill-opacity=".18">✦</text>
-          <text x="220" y="482" font-family="'Cormorant Garamond',Georgia,serif" font-size="11" fill="#C7A96B" fill-opacity=".45" text-anchor="middle" letter-spacing="5">MEDEGIFT · MEDELLÍN</text>
-          <path d="M140 72 Q220 40 300 72" stroke="#C7A96B" stroke-opacity=".15" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
-          <path d="M140 508 Q220 540 300 508" stroke="#C7A96B" stroke-opacity=".1" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
-        </svg>
-        <div class="phi-badge" aria-hidden="true"><p>PREMIUM<br/>MEDELLÍN<br/>✦ 2023 ✦</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cat-section" aria-labelledby="catH2">
-    <header class="cat-head">
-      <p class="cat-eyebrow">Colección activa · 2025</p>
-      <h2 class="cat-h2" id="catH2">Cada regalo, una <em>historia</em></h2>
-    </header>
-    <div class="cat-grid" id="catGrid" role="list" aria-label="Productos destacados MedeGift"></div>
-    <div class="cat-more">
-      <a href="catalogo.html" class="btn-outline">Ver catálogo completo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-  </section>
-
-  <section class="inc-section" aria-labelledby="incH2">
-    <div class="inc-head">
-      <h2 class="inc-h2 reveal" id="incH2">Cada pedido<br/><em>incluye siempre</em></h2>
-      <p class="inc-note reveal">Más allá del producto, cuidamos cada detalle del proceso para que la experiencia sea perfecta de principio a fin.</p>
-    </div>
-    <div class="inc-grid" id="incGrid" role="list" aria-label="Qué incluye cada pedido"></div>
-  </section>
-
-  <section class="cta-section" aria-labelledby="ctaH2">
-    <p class="cta-eyebrow reveal">Pide ahora · Entrega hoy</p>
-    <h2 class="cta-h2 reveal" id="ctaH2">Haz especial<br/><em>este momento</em></h2>
-    <p class="cta-p reveal">Escríbenos por WhatsApp, cuéntanos la ocasión y nosotros diseñamos el regalo perfecto. Asesoría gratuita.</p>
-    <a href="https://wa.me/573017472635?text=Hola%2C+quiero+información+sobre+anchetas" target="_blank" rel="noopener noreferrer" class="btn-wa reveal">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Escribir · +57 301 747 2635
-    </a>
-  </section>
-</main>
-
-<footer class="footer" role="contentinfo">
-  <div class="footer-grid">
-    <div>
-      <p class="f-brand-name">MedeGift</p>
-      <p class="f-brand-tag">Emociones bien empacadas</p>
-      <p class="f-desc">Marca premium de regalos y anchetas en Medellín. Creamos experiencias que conectan personas y generan recuerdos.</p>
-    </div>
-    <div>
-      <p class="f-col-title">Páginas</p>
-      <a href="index.html" class="f-link">Inicio</a>
-      <a href="catalogo.html" class="f-link">Catálogo</a>
-      <a href="nosotros.html" class="f-link">Nosotros</a>
-      <a href="contacto.html" class="f-link">Contacto</a>
-    </div>
-    <div>
-      <p class="f-col-title">Contacto</p>
-      <a href="https://wa.me/573017472635" class="f-link" target="_blank" rel="noopener">+57 301 747 2635</a>
-      <a href="https://instagram.com/medegift.anchetas" class="f-link" target="_blank" rel="noopener">@medegift.anchetas</a>
-      <span class="f-link">Facebook · MedeGift</span>
-    </div>
-    <div>
-      <p class="f-col-title">Cobertura</p>
-      <span class="f-link">Medellín · Envigado</span>
-      <span class="f-link">Bello · Itagüí · Sabaneta</span>
-      <span class="f-link">La Estrella · Caldas</span>
-      <span class="f-link">Copacabana · Girardota</span>
-      <span class="f-link">Barbosa</span>
-    </div>
-  </div>
-  <div class="f-bottom">
-    <p>© 2025 MedeGift · Medellín, Colombia</p>
-    <p>No vendemos productos, entregamos emociones bien empacadas.</p>
-  </div>
-</footer>
-
-<div class="c-backdrop" id="cBkg" role="presentation"></div>
-<aside class="c-panel" id="cPanel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
-  <header class="c-head">
-    <h2 class="c-title">Tu selección</h2>
-    <button class="c-close" id="cClose" aria-label="Cerrar carrito">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4L4 14M4 4l10 10"/></svg>
-    </button>
-  </header>
-  <div class="c-items" id="cItems"></div>
-  <footer class="c-foot">
-    <div class="c-total-row"><span class="c-total-lbl">Total</span><span class="c-total-val" id="cTotal">$0</span></div>
-    <p class="c-note">Envío coordinado por WhatsApp · Valle de Aburrá · Mismo día antes de las 12 m.</p>
-    <button class="btn-confirm" id="btnConfirm">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Confirmar por WhatsApp
-    </button>
-  </footer>
-</aside>
-
-<div class="toast" id="toast" role="status" aria-live="polite">
-  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="2 8 6 12 14 4"/></svg>
-  <span id="toastMsg">Producto agregado</span>
-</div>
+<div id="app"><div id="screen"></div></div>
 
 <script>
-const PRODUCTS=[
-  {id:1,cat:'Ancheta · Día de la Madre',name:'Carta para Mamá',desc:'Bouquete de flores, JP Chenet rosado, Ferrero Rocher ×3, llavero de perlas y estuche en forma de cartera.',price:105000,badge:'Día de la Madre',span:'p-wide',emoji:'🎀',bg:'linear-gradient(135deg,#3B2232 0%,#2C2D18 100%)'},
-  {id:2,cat:'Ancheta · Ocasión especial',name:'Brindis por Ella',desc:'Bouquete con 4 rosas rojas, vino 750 ml, copa de vidrio, Ferrero Rocher ×4, galletas chocochips y decoración elegante.',price:137000,badge:'Premium',span:'p-normal',emoji:'🍷',bg:'linear-gradient(135deg,#1E2A3B 0%,#1E1F0F 100%)'},
-  {id:3,cat:'Ancheta · Detalle',name:'Ancheta Para Mamá #1',desc:'Vaso de vidrio con tapa de bambú y pitillo, bouquete de flores delicadas, estuche decorado y tarjeta personalizada.',price:50000,badge:'Desde $50k',span:'p-third',emoji:'🌸',bg:'linear-gradient(135deg,#1E3328 0%,#2C2D18 100%)'},
-  {id:4,cat:'Ancheta · Café',name:'Café con Aroma a Mamá',desc:'Prensa francesa, vaso doble fondo, Café Juan Valdés 70 g, vela decorativa rosa y tarjeta personalizada.',price:125000,badge:'Favorita',span:'p-third',emoji:'☕',bg:'linear-gradient(135deg,#3B2A1A 0%,#2C2D18 100%)'},
-  {id:5,cat:'Detalle mínimo',name:'Arco de Amor',desc:'Dos rosas rojas, gypsophila, Ferrero Rocher y presentación en arco decorado. El detalle perfecto.',price:30000,badge:'Nuevo',span:'p-third',emoji:'🌹',bg:'linear-gradient(135deg,#3B1E24 0%,#1E1F0F 100%)'},
-  {id:6,cat:'Desayuno sorpresa',name:'Dulce Despertar',desc:'Sándwich artesanal, yogurt, jugo, galletas Touch, frascos con cereal, bandeja de frutas, mesa de madera y decoración premium.',price:160000,badge:'Experiencia completa',span:'p-half',emoji:'🍓',bg:'linear-gradient(135deg,#1E3330 0%,#1E1F0F 100%)'},
-  {id:7,cat:'Detalle decorativo',name:'Vela Decorativa',desc:'Un pequeño detalle con tanta luz como ella. Caja transparente con lazo dorado y tarjeta personalizada.',price:28000,badge:'Pequeño detalle',span:'p-half',emoji:'🕯️',bg:'linear-gradient(135deg,#232338 0%,#2C2D18 100%)'}
+const SINS={
+  superbia:{name:'Soberbia',latin:'Superbia',icon:'👑',color:'#9b59b6',desc:'El orgullo que se niega a inclinarse ante nadie. Juzgas antes de escuchar, lideras antes de pedir permiso y consideras que tu visión del mundo es la más acertada. Es el pecado de los dioses caídos.'},
+  avaritia:{name:'Avaricia',latin:'Avaritia',icon:'🪙',color:'#f1c40f',desc:'El deseo que nunca se sacia. No es solo el dinero: acumulas tiempo, afecto, reconocimiento, control. Cedes con dificultad porque lo que tienes define quién eres. El mundo es un recurso; tú, su administrador.'},
+  luxuria:{name:'Lujuria',latin:'Luxuria',icon:'🌹',color:'#e74c3c',desc:'El hambre de placer y conexión en su forma más intensa. Buscas experiencias que te desborden. Cuando alguien o algo te atrae, el mundo pierde nitidez y solo queda ese deseo. Ardes con facilidad.'},
+  invidia:{name:'Envidia',latin:'Invidia',icon:'🪞',color:'#1abc9c',desc:'El dolor que nace de ver brillar a otro. No envidias sin razón: hay algo que deseas profundamente y que sientes que el destino le dio a quien menos lo merecía. La envidia es una brújula rota hacia tu propósito.'},
+  gula:{name:'Gula',latin:'Gula',icon:'🍷',color:'#e67e22',desc:'El exceso como forma de sentir. No se trata de comida: te entregas a las experiencias hasta el fondo. Moderarte te parece una pérdida. Vives plenamente o no vives. El mundo existe para ser saboreado.'},
+  ira:{name:'Ira',latin:'Ira',icon:'🔥',color:'#e74c3c',desc:'El fuego que no pide disculpas. Sientes con intensidad y cuando algo vulnera lo que valoras, reaccionas sin filtros. La injusticia te quema. Tu ira no es caos: es un sentido de justicia que no sabe esperar.'},
+  acedia:{name:'Pereza',latin:'Acedia',icon:'🌑',color:'#7f8c8d',desc:'La distancia del alma. No es cansancio físico: es una indiferencia hacia lo que debería importar. Puedes ser brillante y aun así desaparecer en el momento clave. La acedia no roba tu energía; roba tu urgencia.'},
+};
+
+const VIRTUES={
+  superbia:'Tu antídoto es la humildad — no la sumisión, sino el arte de aprender de quien menos lo esperas.',
+  avaritia:'Tu antídoto es la generosidad — no dar lo que sobra, sino compartir lo que cuesta compartir.',
+  luxuria:'Tu antídoto es la templanza — no apagar el fuego, sino aprender a elegir dónde ardes.',
+  invidia:'Tu antídoto es la admiración genuina — convertir lo que envidias en una señal de lo que tú mismo puedes crear.',
+  gula:'Tu antídoto es la sobriedad — no la austeridad, sino el placer consciente que se recuerda.',
+  ira:'Tu antídoto es la paciencia — no la pasividad, sino la capacidad de elegir cuándo actuar.',
+  acedia:'Tu antídoto es la diligencia — no la prisa, sino el compromiso con lo que genuinamente importa.',
+};
+
+const QUESTIONS=[
+  {block:'A',blockName:'Naturaleza',text:'Cuando alguien recibe un elogio que tú sientes que merecías más, tu reacción inmediata es…',type:'single',options:[{text:'Irritarme en silencio. Eso era mío.',sins:{superbia:2,invidia:2}},{text:'Analizar qué hizo esa persona distinto a mí.',sins:{invidia:1,acedia:1}},{text:'Seguir adelante. Llegaré más lejos de todas formas.',sins:{superbia:3}},{text:'Sentir una punzada, pero felicitarle genuinamente.',sins:{invidia:1}}]},
+  {block:'A',blockName:'Naturaleza',text:'Un fin de semana libre sin obligaciones. ¿Cómo lo vives?',type:'single',options:[{text:'Me lanzo a placer: comida, salidas, música, lo que venga.',sins:{gula:3,luxuria:1}},{text:'Trabajo en algo que me haga avanzar. No puedo "no hacer".',sins:{superbia:1,avaritia:2}},{text:'Me quedo en cama más tiempo del planeado. El mundo puede esperar.',sins:{acedia:3}},{text:'Busco a alguien con quien compartirlo. La soledad me pesa.',sins:{luxuria:2,invidia:1}}]},
+  {block:'A',blockName:'Naturaleza',text:'Cuando discutes con alguien y sientes que tienes razón, ¿qué haces?',type:'single',options:[{text:'Cedo para mantener la paz, aunque por dentro sepa que tenía razón.',sins:{acedia:2}},{text:'Presento argumentos hasta que quede claro quién tenía la razón.',sins:{superbia:3,ira:1}},{text:'Me callo, pero no olvido.',sins:{ira:2,invidia:1}},{text:'Expreso lo que pienso con fuerza y sin rodeos. No me da igual perder.',sins:{ira:3}}]},
+  {block:'A',blockName:'Naturaleza',text:'Tu motivación más honesta para alcanzar el éxito es…',type:'single',options:[{text:'Que nadie pueda cuestionarme ni ignorarme.',sins:{superbia:3}},{text:'La seguridad de tener más que suficiente. Nunca depender de nadie.',sins:{avaritia:3}},{text:'Las experiencias que el dinero y el tiempo libre permiten.',sins:{gula:2,luxuria:2}},{text:'Superar a quienes siempre parecieron tenerlo más fácil.',sins:{invidia:3}}]},
+  {block:'A',blockName:'Naturaleza',text:'Algo que te cuesta genuinamente hacer es…',type:'single',options:[{text:'Pedir ayuda. Prefiero tardar más y hacerlo solo.',sins:{superbia:2}},{text:'Soltar algo que ya no me sirve pero que acumulé con esfuerzo.',sins:{avaritia:3}},{text:'Frenarme cuando algo me atrae o me apasiona.',sins:{luxuria:2,gula:1}},{text:'Arrancar con algo importante cuando no tengo ganas.',sins:{acedia:3}}]},
+  {block:'B',blockName:'Escenario',scenario:true,intro:'Escenario I',text:'Llevas semanas trabajando en un proyecto que te ha costado. En la presentación final, un compañero recibe todos los elogios — incluso por ideas que surgieron de ti. ¿Qué pasa dentro de ti y qué haces?',type:'text',sins_map:{keywords:{'reclamar|digo|corrijo|señalo|aclaro|reivindico':{superbia:2,ira:2},'callo|nada|guardo|trago':{acedia:2,ira:1},'aprendo|nota|curiosidad|reflexion':{invidia:1},'rabia|enojo|molest|injust|furia':{ira:3},'envidia|merezc|debía ser yo':{invidia:3},'da igual|no importa|sigo':{acedia:2},'felicito|celebro|alegr':{acedia:1}}}},
+  {block:'B',blockName:'Escenario',scenario:true,intro:'Escenario II',text:'Alguien a quien amas te da a elegir: una noche de placer espontáneo que se sale de lo planeado, o cumplir un compromiso previo que puedes posponer fácilmente. ¿Qué eliges y por qué?',type:'text',sins_map:{keywords:{'placer|espontáne|vivo|ahora|aprovechar|disfrut':{luxuria:3,gula:2},'compromiso|responsab|palabra|había prometido':{superbia:1},'depende|analizo|evalúo':{avaritia:1},'él|ella|persona|amor|conexión':{luxuria:2},'posterg|después|mañana':{acedia:2}}}},
+  {block:'B',blockName:'Escenario',scenario:true,intro:'Escenario III',text:'Te ofrecen una oportunidad grande, pero implica compartir crédito y recursos con alguien que no te genera confianza. ¿Cómo lo piensas? ¿Aceptas?',type:'text',sins_map:{keywords:{'no|rechazo|prefiero solo|sin él|sin ella':{superbia:2,avaritia:2},'acepto|sí|por la oportunidad':{avaritia:1},'negocio|condicion|acuerdo|límites':{avaritia:3},'desconfío|cuido|vigilo|protejo':{avaritia:2,ira:1},'da igual|me da lo mismo':{acedia:2}}}},
+  {block:'C',blockName:'Tu vida real',text:'Piensa en un momento en que actuaste movido por un deseo o impulso que después te costó algo — un exceso, una reacción, una decisión que no fue tu mejor versión. Descríbelo brevemente, sin juzgarte.',type:'text',sins_map:{keywords:{'gastaste|compr|dinero|acumul':{avaritia:2,gula:1},'rabia|explot|grité|dije algo que':{ira:3},'orgullo|no pedí ayuda|no admití':{superbia:3},'pereza|no hice|postergué|dejé':{acedia:3},'celos|envidia|comparé':{invidia:3},'exceso|mucho|demasiado|desbordar':{gula:2,luxuria:1},'atracción|person|deseo|no pude resistir':{luxuria:3}}}},
+  {block:'C',blockName:'Tu vida real',text:'Si tuvieras que nombrar el patrón que más se repite en tus errores o decisiones que luego lamentas — ¿qué diría alguien que te conoce bien?',type:'text',sins_map:{keywords:{'orgullo|creído|arrogante|superior':{superbia:3},'materialista|dinero|ahorrar|nunca suelto':{avaritia:3},'impulsiv|incapaz de resistir|placer|sensaciones':{luxuria:2,gula:2},'envidios|comparar|celoso':{invidia:3},'come|exceso|beber|fiesta':{gula:3},'explosiv|irascible|explotar|mal genio':{ira:3},'perezoso|dejar|procrastin|no termino':{acedia:3}}}},
 ];
-const INCLUDES=[
-  {icon:'🎀',name:'Tarjeta personalizada',desc:'Escrita a mano con el mensaje que nos compartes. Cada palabra importa.'},
-  {icon:'📦',name:'Empaque artesanal',desc:'Caja o estuche decorado a mano con materiales premium y cinta dorada.'},
-  {icon:'🌸',name:'Decoración floral',desc:'Flores frescas o secas según el producto, siempre cuidadas.'},
-  {icon:'📍',name:'Evidencia de entrega',desc:'Foto o video del momento exacto en que llega tu regalo.'},
-  {icon:'⚡',name:'Envío mismo día',desc:'Pedidos antes del mediodía. Todo el Valle de Aburrá.'},
-  {icon:'💬',name:'Asesoría por WhatsApp',desc:'Te acompañamos desde la elección hasta la entrega, sin costo.'}
-];
 
-let cart=JSON.parse(localStorage.getItem('mg_cart')||'[]');
-const saveCart=()=>localStorage.setItem('mg_cart',JSON.stringify(cart));
-const cartTotal=()=>cart.reduce((s,i)=>s+i.price*i.qty,0);
-const cartCount=()=>cart.reduce((s,i)=>s+i.qty,0);
-const fmt=n=>'$'+n.toLocaleString('es-CO');
+let currentQ=0;
+let scores={superbia:0,avaritia:0,luxuria:0,invidia:0,gula:0,ira:0,acedia:0};
+let answers=[];
+let selectedOption=null;
+let textAnswer='';
+let userName='';
+let finalPcts={};
+let finalDominant='';
+let textAnswers=[];
 
-/* Marquee */
-(function(){
-  const items=['✦ Anchetas Premium','✦ Desayunos Sorpresa','✦ Cajas Regalo','✦ Medellín · Valle de Aburrá','✦ Velas Decorativas','✦ Regalos Personalizados','✦ Entrega el Mismo Día','✦ @medegift.anchetas'];
-  const t=document.getElementById('mTrack');
-  if(t) t.innerHTML=[...items,...items].map(s=>`<span class="marquee-item">${s}</span>`).join('');
-})();
-
-/* Catalog */
-const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.style.transitionDelay||'0')||0;setTimeout(()=>e.target.classList.add('in'),d);revealObs.unobserve(e.target)}});
-},{threshold:.08,rootMargin:'0px 0px -28px 0px'});
-
-(function(){
-  const g=document.getElementById('catGrid');
-  if(!g)return;
-  const styleEl=document.createElement('style');
-  styleEl.textContent=PRODUCTS.map(p=>`@keyframes fe${p.id}{from{transform:translateY(0) rotate(0deg)}to{transform:translateY(${-7-p.id*1.4}px) rotate(${p.id%2?4:-4}deg)}}`).join('');
-  document.head.appendChild(styleEl);
-  g.innerHTML=PRODUCTS.map((p,i)=>`
-    <article class="pcard ${p.span}" role="listitem" style="transition-delay:${i*70}ms" tabindex="0" aria-label="${p.name} — ${fmt(p.price)}">
-      <div class="pcard-art" style="background:${p.bg}">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,7vw,5.5rem);filter:drop-shadow(0 6px 22px rgba(0,0,0,.45));z-index:2;animation:fe${p.id} ${3.2+p.id*.3}s ease-in-out infinite alternate;" aria-hidden="true">${p.emoji}</div>
-        <div style="position:absolute;width:55%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(199,169,107,.14) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1;" aria-hidden="true"></div>
-        <div class="pcard-overlay"></div>
-        <span class="pcard-badge">${p.badge}</span>
-      </div>
-      <div class="pcard-info">
-        <p class="pcard-cat">${p.cat}</p>
-        <h3 class="pcard-name">${p.name}</h3>
-        <p class="pcard-desc">${p.desc}</p>
-        <div class="pcard-foot">
-          <div class="pcard-price">${fmt(p.price)}<small> COP</small></div>
-          <button class="btn-add" data-id="${p.id}" aria-label="Agregar ${p.name} al carrito por ${fmt(p.price)}">+ Agregar</button>
-        </div>
-      </div>
-    </article>
-  `).join('');
-  g.querySelectorAll('.btn-add').forEach(b=>{b.addEventListener('click',e=>{e.stopPropagation();addToCart(+b.dataset.id,b)})});
-  g.querySelectorAll('.pcard').forEach(card=>{
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.querySelector('.btn-add')?.click()}});
-    revealObs.observe(card);
-  });
-})();
-
-/* Includes */
-(function(){
-  const g=document.getElementById('incGrid');
-  if(!g)return;
-  g.innerHTML=INCLUDES.map((it,i)=>`<div class="inc-card" role="listitem" style="transition-delay:${i*85}ms"><div class="inc-icon" aria-hidden="true">${it.icon}</div><div><p class="inc-name">${it.name}</p><p class="inc-desc">${it.desc}</p></div></div>`).join('');
-  g.querySelectorAll('.inc-card').forEach(el=>revealObs.observe(el));
-})();
-
-/* Reveals */
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-
-/* Counter */
-const countObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=document.getElementById('cnt1');if(!el)return;let n=0;const t=setInterval(()=>{n=Math.min(n+9,500);el.textContent=n+'+';if(n>=500)clearInterval(t)},18);countObs.disconnect()}})},{threshold:.5});
-const st=document.querySelector('.phi-stats');if(st)countObs.observe(st);
-
-/* Cart */
-function addToCart(id,btn){
-  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
-  const ex=cart.find(x=>x.id===id);
-  if(ex){ex.qty++}else{cart.push({...p,qty:1})}
-  saveCart();refreshCartUI();
-  const n=document.getElementById('cartN');n.style.transform='scale(1.6)';setTimeout(()=>n.style.transform='scale(1)',280);
-  if(btn){btn.textContent='✓ Listo';btn.classList.add('added');setTimeout(()=>{btn.textContent='+ Agregar';btn.classList.remove('added')},1500)}
-  showToast(`"${p.name}" agregado`);
+function analyzeText(text,sins_map){
+  const lower=text.toLowerCase();
+  const result={};
+  for(const[pattern,sinValues]of Object.entries(sins_map.keywords)){
+    const regex=new RegExp(pattern,'i');
+    if(regex.test(lower)){for(const[sin,val]of Object.entries(sinValues)){result[sin]=(result[sin]||0)+val}}
+  }
+  if(Object.keys(result).length===0){const wc=text.trim().split(/\s+/).length;if(wc>20)result['gula']=1;else result['acedia']=1;}
+  return result;
 }
-function refreshCartUI(){
-  const n=cartCount(),badge=document.getElementById('cartN');
-  badge.textContent=n;badge.classList.toggle('show',n>0);
-  const total=document.getElementById('cTotal');if(total)total.textContent=fmt(cartTotal());
-  renderCartItems();
-}
-function renderCartItems(){
-  const c=document.getElementById('cItems');if(!c)return;
-  if(cart.length===0){c.innerHTML='<div class="c-empty"><p>Tu selección está vacía</p><small>Explora nuestra colección y elige algo especial</small></div>';return}
-  c.innerHTML=cart.map(item=>`
-    <div class="c-item">
-      <div class="c-thumb" role="img" aria-label="${item.name}">${item.emoji}</div>
-      <div class="c-info">
-        <p class="c-iname">${item.name}</p>
-        <p class="c-iprice">${fmt(item.price)} · und</p>
-        <div class="c-qty">
-          <button class="qty-b" data-action="dec" data-id="${item.id}" aria-label="Reducir cantidad">−</button>
-          <span class="qty-n">${item.qty}</span>
-          <button class="qty-b" data-action="inc" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
-        </div>
+
+function getProgress(){return Math.round((currentQ/QUESTIONS.length)*100)}
+
+function renderCover(){
+  document.getElementById('screen').innerHTML=`
+    <div class="cover">
+      <span class="cover-symbol">☩</span>
+      <h1 style="font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:0.12em;color:#c9a84c;text-transform:uppercase;margin-bottom:0.5rem;line-height:1.3">Septem Peccata<br>Mortalia</h1>
+      <p class="cover-sub">Un examen del alma en diez preguntas</p>
+      <p class="cover-desc">Nadie escapa a los siete pecados capitales. La pregunta no es si los llevas dentro —<br>es cuál te define con mayor fuerza.<br><br>Responde con honestidad. No hay respuestas correctas,<br>solo respuestas verdaderas.</p>
+      <div class="name-wrap" style="max-width:300px;margin:0 auto 2rem">
+        <span class="name-label">Tu nombre (opcional)</span>
+        <input class="name-input" id="name-field" type="text" placeholder="Escribe tu nombre…" maxlength="40">
       </div>
-      <button class="c-del" data-id="${item.id}" aria-label="Eliminar ${item.name}">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 3L3 10M3 3l7 7"/></svg>
-      </button>
-    </div>
-  `).join('');
-  c.querySelectorAll('.qty-b').forEach(b=>{b.addEventListener('click',()=>{const id=+b.dataset.id,item=cart.find(i=>i.id===id);if(!item)return;if(b.dataset.action==='inc')item.qty++;else{item.qty--;if(item.qty<=0)cart=cart.filter(i=>i.id!==id)}saveCart();refreshCartUI()})});
-  c.querySelectorAll('.c-del').forEach(b=>{b.addEventListener('click',()=>{cart=cart.filter(i=>i.id!==+b.dataset.id);saveCart();refreshCartUI()})});
+      <button class="btn-primary" onclick="startTest()">Comenzar el examen</button>
+    </div>`;
 }
-const openCart=()=>{document.getElementById('cPanel').classList.add('open');document.getElementById('cBkg').classList.add('open');document.body.style.overflow='hidden';document.getElementById('cClose').focus()};
-const closeCart=()=>{document.getElementById('cPanel').classList.remove('open');document.getElementById('cBkg').classList.remove('open');document.body.style.overflow='';document.getElementById('btnCart').focus()};
-document.getElementById('btnCart').addEventListener('click',openCart);
-document.getElementById('cClose').addEventListener('click',closeCart);
-document.getElementById('cBkg').addEventListener('click',closeCart);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCart()});
-document.getElementById('btnConfirm').addEventListener('click',()=>{
-  if(cart.length===0)return;
-  const lines=cart.map(i=>`• ${i.name} ×${i.qty} — ${fmt(i.price*i.qty)}`);
-  const msg=encodeURIComponent(`¡Hola MedeGift! 🎁 Me gustaría hacer el siguiente pedido:\n\n${lines.join('\n')}\n\n*Total: ${fmt(cartTotal())} COP*\n\nPor favor confirmar disponibilidad y datos de entrega. ¡Gracias!`);
-  window.open(`https://wa.me/573017472635?text=${msg}`,'_blank');
-});
 
-let toastT;
-function showToast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800)}
+function renderQuestion(){
+  const q=QUESTIONS[currentQ];
+  const progress=getProgress();
+  let optionsHTML='';
+  if(q.type==='single'){
+    optionsHTML=`<div class="options">`+q.options.map((o,i)=>`<button class="opt-btn" id="opt-${i}" onclick="selectOption(${i})">${o.text}</button>`).join('')+`</div>`;
+  } else {
+    optionsHTML=`<div class="textarea-wrap"><textarea id="text-ans" placeholder="Escribe aquí, con tus propias palabras…" oninput="onTextInput(this.value)"></textarea></div>`;
+  }
+  const scenarioLabel=q.scenario?`<p class="q-scenario-intro">${q.intro}</p>`:'';
+  document.getElementById('screen').innerHTML=`
+    <div class="question-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+      <p class="block-label">Bloque ${q.block} — ${q.blockName}</p>
+      <p class="q-number">Pregunta ${currentQ+1} de ${QUESTIONS.length}</p>
+      ${scenarioLabel}
+      <p class="q-text">${q.text}</p>
+      ${optionsHTML}
+      <div class="nav-row"><button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>Continuar →</button></div>
+    </div>`;
+  selectedOption=null;textAnswer='';
+}
 
-/* Header scroll */
-const hdr=document.getElementById('hdr');
-window.addEventListener('scroll',()=>{const scrolled=window.scrollY>50;hdr.classList.toggle('scrolled',scrolled);hdr.classList.toggle('on-dark',!scrolled)},{passive:true});
+function selectOption(i){
+  document.querySelectorAll('.opt-btn').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  selectedOption=i;
+  document.getElementById('btn-next').disabled=false;
+}
 
-/* Parallax */
-const hb=document.querySelector('.hero-body');
-window.addEventListener('scroll',()=>{if(!hb)return;const y=window.scrollY;if(y<window.innerHeight){hb.style.transform=`translateY(${y*.2}px)`;hb.style.opacity=Math.max(0,1-y/(window.innerHeight*.68))}},{passive:true});
+function onTextInput(val){
+  textAnswer=val;
+  const btn=document.getElementById('btn-next');
+  if(btn)btn.disabled=val.trim().split(/\s+/).length<4;
+}
 
-refreshCartUI();
+function nextQuestion(){
+  const q=QUESTIONS[currentQ];
+  if(q.type==='single'&&selectedOption!==null){
+    const chosen=q.options[selectedOption];
+    for(const[sin,val]of Object.entries(chosen.sins)){scores[sin]=(scores[sin]||0)+val;}
+    answers.push({q:currentQ,type:'single',answer:q.options[selectedOption].text});
+  } else if(q.type==='text'&&textAnswer.trim()){
+    const result=analyzeText(textAnswer,q.sins_map);
+    for(const[sin,val]of Object.entries(result)){if(scores.hasOwnProperty(sin))scores[sin]=(scores[sin]||0)+val;}
+    answers.push({q:currentQ,type:'text',question:q.text,answer:textAnswer});
+    textAnswers.push({question:q.text,answer:textAnswer});
+  }
+  currentQ++;
+  if(currentQ>=QUESTIONS.length)renderResult();
+  else renderQuestion();
+}
+
+function startTest(){
+  const nf=document.getElementById('name-field');
+  userName=nf?nf.value.trim():'';
+  currentQ=0;
+  scores={superbia:0,avaritia:0,luxuria:0,invidia:0,gula:0,ira:0,acedia:0};
+  answers=[];textAnswers=[];
+  renderQuestion();
+}
+
+function computePcts(){
+  const minScore=1;
+  const adjusted={};
+  for(const[k,v]of Object.entries(scores))adjusted[k]=Math.max(v,minScore);
+  const adjTotal=Object.values(adjusted).reduce((a,b)=>a+b,0);
+  const pcts={};
+  for(const[k,v]of Object.entries(adjusted))pcts[k]=Math.round((v/adjTotal)*100);
+  const fix=Object.values(pcts).reduce((a,b)=>a+b,0)-100;
+  const keys=Object.keys(pcts).sort((a,b)=>pcts[b]-pcts[a]);
+  pcts[keys[0]]-=fix;
+  return{pcts,dominant:keys[0],keys};
+}
+
+function exportTxt(){
+  const sin=SINS[finalDominant];
+  const dateStr=new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
+  const header=userName?`SEPTEM PECCATA MORTALIA — Resultado de ${userName}`:'SEPTEM PECCATA MORTALIA — Resultado';
+  let txt=`${header}\n`;
+  txt+=`Fecha: ${dateStr}\n`;
+  txt+=`${'─'.repeat(50)}\n\n`;
+  txt+=`PECADO DOMINANTE: ${sin.name.toUpperCase()} (${sin.latin})\n\n`;
+  txt+=`${sin.desc}\n\n`;
+  txt+=`${'─'.repeat(50)}\n`;
+  txt+=`COMPOSICIÓN DEL ALMA\n`;
+  txt+=`${'─'.repeat(50)}\n`;
+  const sorted=Object.keys(finalPcts).sort((a,b)=>finalPcts[b]-finalPcts[a]);
+  for(const k of sorted){
+    const bar='█'.repeat(Math.round(finalPcts[k]/5))+'░'.repeat(20-Math.round(finalPcts[k]/5));
+    txt+=`${SINS[k].name.padEnd(12)} ${bar} ${String(finalPcts[k])+'%'}\n`;
+  }
+  txt+=`\n${'─'.repeat(50)}\n`;
+  txt+=`VIRTUD PENDIENTE\n`;
+  txt+=`${'─'.repeat(50)}\n`;
+  txt+=`${VIRTUES[finalDominant]}\n\n`;
+  txt+=`${'─'.repeat(50)}\n`;
+  txt+=`RESPUESTAS ABIERTAS\n`;
+  txt+=`${'─'.repeat(50)}\n`;
+  for(let i=0;i<textAnswers.length;i++){
+    txt+=`\nPregunta ${i+1}:\n${textAnswers[i].question}\n\nRespuesta:\n${textAnswers[i].answer}\n`;
+  }
+  txt+=`\n${'─'.repeat(50)}\n`;
+  txt+=`Generado con Septem Peccata Mortalia\n`;
+
+  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const filename=(userName?userName.replace(/\s+/g,'_')+'_':'')+'pecados_capitales.txt';
+  a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
+}
+
+function renderResult(){
+  const{pcts,dominant,keys}=computePcts();
+  finalPcts=pcts;finalDominant=dominant;
+  const sin=SINS[dominant];
+  const barColors={superbia:'#9b59b6',avaritia:'#f39c12',luxuria:'#e74c3c',invidia:'#1abc9c',gula:'#e67e22',ira:'#c0392b',acedia:'#7f8c8d'};
+  const barsHTML=keys.map(k=>{
+    const s=SINS[k];const pct=pcts[k];const isDom=k===dominant;
+    return`<div class="sin-bar-row ${isDom?'dominant':''}"><span class="sin-bar-label">${s.name}</span><div class="sin-bar-track"><div class="sin-bar-fill" id="bar-${k}" style="background:${barColors[k]};width:0%"></div></div><span class="sin-bar-pct">${pct}%</span></div>`;
+  }).join('');
+  const nameHeader=userName?`<p class="block-label" style="text-align:center;margin-bottom:0.3rem">${userName}</p>`:'';
+  document.getElementById('screen').innerHTML=`
+    <div class="result-wrap">
+      <div class="result-header">
+        <span class="result-sin-icon">${sin.icon}</span>
+        ${nameHeader}
+        <p class="block-label" style="text-align:center;margin-bottom:0.4rem">Tu pecado capital dominante</p>
+        <h2 class="result-sin-name">${sin.name}</h2>
+        <p class="result-sin-latin">${sin.latin}</p>
+        <p class="result-desc">${sin.desc}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="bars-section">
+        <p class="bars-title">Composición de tu alma</p>
+        ${barsHTML}
+      </div>
+      <div class="divider"></div>
+      <div class="virtue-section">
+        <p class="virtue-label">Tu virtud pendiente</p>
+        <p class="virtue-text">${VIRTUES[dominant]}</p>
+      </div>
+      <div class="ornament">✦ ✦ ✦</div>
+      <div class="btn-row">
+        <button class="btn-export" onclick="exportTxt()"><i class="ti ti-download" aria-hidden="true"></i> Exportar resultado</button>
+        <button class="btn-restart" onclick="restartTest()">Repetir el examen</button>
+      </div>
+      <p class="export-note">El .txt incluye porcentajes, descripción y todas tus respuestas abiertas</p>
+    </div>`;
+  setTimeout(()=>{keys.forEach(k=>{const el=document.getElementById('bar-'+k);if(el)el.style.width=pcts[k]+'%';});},200);
+}
+
+function restartTest(){
+  userName='';finalPcts={};finalDominant='';textAnswers=[];
+  renderCover();
+}
+
+renderCover();
 </script>
-</body>
-</html>
